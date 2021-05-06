@@ -1,51 +1,41 @@
-# app.py
+import os
+
 from flask import Flask, request, jsonify
+from sendgrid.helpers.eventwebhook import EventWebhook
+
+
 app = Flask(__name__)
 
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from url parameter
-    name = request.args.get("name", None)
 
-    # For debugging
-    print(f"got name {name}")
+def authenticate(signature, timestamp, payload):
+    PUBLIC_SENDGRID_KEY = os.getenv("PUBLIC_SENDGRID_KEY")
+    webhook = EventWebhook(PUBLIC_SENDGRID_KEY)
+    authenticated = webhook.verify_signature(payload, signature, timestamp)
+    return authenticated
 
-    response = {}
 
-    # Check if user sent a name at all
-    if not name:
-        response["ERROR"] = "no name found, please send a name."
-    # Check if the user entered a number not a name
-    elif str(name).isdigit():
-        response["ERROR"] = "name can't be numeric."
-    # Now the user entered a valid name
-    else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
-
-    # Return the response in json format
-    return jsonify(response)
-
-@app.route('/post/', methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
+    print("Testing webhook")
+    try:
+        payload = request.data.decode('utf-8')
+        timestamp = request.headers['x-twilio-email-event-webhook-timestamp']
+        signature = request.headers['x-twilio-email-event-webhook-signature']
+
+        authenticated = authenticate(signature, timestamp, payload)
+
+        print(f"Payload: '{payload}'")
+        print(f"Timestamp: '{timestamp}'")
+        print(f"Signature: '{signature}'")
+        print(f"Authenticated: {authenticated}")
+
+        return jsonify({"status": 200})
+    except Exception as e:
+        print("Ran into an error", e)
         return jsonify({
-            "Message": f"Welcome {name} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD" : "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
+            "error": str(e)
         })
 
-# A welcome message to test our server
 @app.route('/')
 def index():
-    return "<h1>Welcome to our server !!</h1>"
-
-if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+    return "<h1>Hello world!</h1>"
