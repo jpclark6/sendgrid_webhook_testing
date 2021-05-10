@@ -3,6 +3,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 html_message = '<p>Hello <a href="https://example.com?test=Daré">test</a></p>'
+# html_message = '<p>Hello <a href="https://example.com?test=Dar">test</a></p>'
 
 message = Mail(
     from_email=os.environ.get('FROM_EMAIL'),

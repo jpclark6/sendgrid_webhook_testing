@@ -5,6 +5,8 @@ Testing authentication with non-ascii characters in parts of SendGrid webhook me
 
 ## Methodology
 
+### Testing SendGrid Webhook
+
 Send an email through SendGrid that will eventually cause a webhook event that includes a non-ascii character in the payload. Set up basic Flask app on Heroku to run through the basic authentication script and print the outputs. See app.py for details.
 
 In this case it is by adding a link with the character "é" so that when the link is clicked it sends a click webhook event with that character in the "url" value of the payload.
@@ -13,7 +15,15 @@ See the file send_message.py for the exact code and message.
 
 Set up a basic web app to authenticate the payload and print out the response. Cause an "open" event that doesn't include the special character and and view the result. Cause a click event that includes the "é" character.
 
+### Testing Signing and Verifying
+
+Using the starkbank/ecdsa-python package that the SendGrid python package uses to verify the messages create a private and public key, then upload the public key to the server. Create payloads that match the passing and failing payloads from above. Create signatures, then send to the server using the updated public key.
+
+Check the status of whether the webhooks are passing or failing.
+
 ## Results
+
+### SendGrid  Webhook
 
 The message that did not include the special character was correctly authenticated. The message that did include the special character was not authenticated.
 
@@ -35,6 +45,10 @@ Signature: 'MEUCIQDFv0s0m0kEevGdKJ69/NpEmKwnzltX4YMGst7Xmjau/AIgdC/cfUGZ/+gaJ9Mu
 Authenticated: False
 ```
 
+### Signing and Verifying
+
+When we signed the webhooks ourselves we were able to get both to pass, leading us to believe that our authentication on the server works correctly, and that the package can handle characters correctly. It leads us to believe something may be wrong with the signature we are receiving from SendGrid.
+
 ## Required env vars
 
 ### App only (Heroku)
@@ -53,3 +67,14 @@ Authenticated: False
 $ heroku create
 $ git push heroku master
 ```
+
+### To use mock webhook
+
+Create keys
+
+```bash
+$ openssl ecparam -name secp256k1 -genkey -out privateKey.pem
+$ openssl ec -in privateKey.pem -pubout -out publicKey.pem
+```
+
+Update the URL for heroku and run mock_webhook.py
