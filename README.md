@@ -30,18 +30,18 @@ The message that did not include the special character was correctly authenticat
 Correctly authenticated message from logs
 
 ```
-Payload: '[{"email":"padiko1105@drluotan.com","event":"open","ip":"xxx.xxx.xxx.xxx","sg_content_type":"html","sg_event_id":"lvPaxhihT6qB8ZHu26WRHQ","sg_message_id":"CDd0Q90kTcyShLwdFkMdxg.filterdrecv-79b6969b64-mdqmv-1-6094524B-167.0","timestamp":1620334630,"useragent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36"}]\r\n'
-Timestamp: '1620334643'
-Signature: 'MEYCIQDwobQhZKhbftob3nHjljj63olFjm2zpb28MMpgCu5ufwIhAPuJwS4hqSjzuNAYpuHZoPCOF0LBLnQTdwysOHnEmsQU'
+Payload: '[{"email":"rarabor719@threepp.com","event":"open","ip":"xxx.xxx.xxx.xxx","sg_content_type":"html","sg_event_id":"j0NhGx01TCimNpTmBEN0Yg","sg_message_id":"m7BqO7JsQ_Obv9nkaA-sCA.filterdrecv-77df4fc8dd-6h694-1-609974BE-A5.0","timestamp":1620669647,"useragent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36"}]'
+Timestamp: '1620669672'
+Signature: 'MEUCIQCfyuukiyRXu8tTY0dN+eiouJrJ+bj4t7iI0+wgvIY+xAIgIvu2VUmpDpt9hLiQ1ond6Wkv7wnsJifTJBdZO+O9iHY='
 Authenticated: True
 ```
 
 Falsely rejected message from logs
 
 ```
-Payload: '[{"email":"padiko1105@drluotan.com","event":"click","ip":"xxx.xxx.xxx.xxx","sg_event_id":"CrGNumiJQZWsjFRBmf2XXQ","sg_message_id":"CDd0Q90kTcyShLwdFkMdxg.filterdrecv-79b6969b64-mdqmv-1-6094524B-167.0","timestamp":1620334754,"url":"https://example.com?test=Daré","url_offset":{"index":0,"type":"html"},"useragent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36"}]\r\n'
-Timestamp: '1620334768'
-Signature: 'MEUCIQDFv0s0m0kEevGdKJ69/NpEmKwnzltX4YMGst7Xmjau/AIgdC/cfUGZ/+gaJ9MuZ7cfkTMDKDmcgxUG1vG2AFepxmU='
+Payload: '[{"email":"rarabor719@threepp.com","event":"click","ip":"xxx.xxx.xxx.xxx","sg_event_id":"EEKhxyYSSjCQ4M92ZUTVtg","sg_message_id":"m7BqO7JsQ_Obv9nkaA-sCA.filterdrecv-77df4fc8dd-6h694-1-609974BE-A5.0","timestamp":1620669677,"url":"https://example.com?test=Daré","url_offset":{"index":0,"type":"html"},"useragent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36"}]\r\n'
+Timestamp: '1620669695'
+Signature: 'MEUCIFxRxfMcENGrtAj0vAvmqix051ZIBFVHzCsWcFdZrUZ7AiEA5GzAOf5SlyN2Z+JW5jy+NZNAk67Nb0wQuGw+EYfmwkM='
 Authenticated: False
 ```
 
