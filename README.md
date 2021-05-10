@@ -72,6 +72,7 @@ Authenticated: True
 ### App only (Heroku)
 
 * PUBLIC_SENDGRID_KEY=key to authenticate messages
+* PERSONAL_PUBLIC_SENDGRID_KEY=personal public key to check mock webhook endpoint
 
 ### To send email (send_message.py)
 
